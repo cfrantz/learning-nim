@@ -63,16 +63,13 @@ proc render*(this: FractalRenderer): void =
     stride = surface.pitch div 4
 
   echo "Coordinates: ", this.x0, ",", this.y0, ",", this.x1, ",", this.y1
-  while y < this.height:
+  for y in 0..this.height-1:
     xx = this.x0
-    x = 0
-    while x < this.width:
+    for x in 0..this.width-1:
       pptr[p] = this.fracfunc(xx, yy, this.bailout)
       xx += xi
-      x += 1
       p += 1
     yy += yi
-    y += 1
     p += stride - this.width
     discard updateSurface(this.window)
   echo "Rendered ", p, " pixels"
