@@ -19,6 +19,8 @@ proc usage(): int =
     -w|--width=<x>: Set the image width.
     -f|--fractal=<f>: Set the fractal algorithm.
     -c|--color=<c>: Set the color algorithm.
+    -t|--threads=<true|false>: Use threads for rendering (default: false).
+    -u|--update=<true|false>: Update display during render (default: true).
     -p=x0,y0,x1,y1: Set the starting coordinates.
 """
   echo "Known fractal algorithms:"
@@ -42,6 +44,8 @@ proc main(): int =
     # ff is the fractal function, cf is the color function.
     ff = fractalFunc["mandelbrot"]
     cf = colorFunc["naive"]
+    useThreads = false
+    updateDuringRender = true
 
   for kind, key, value in getopt():
     case kind
@@ -60,6 +64,10 @@ proc main(): int =
         ff = fractalFunc[value.string]
       of "color", "c":
         cf = colorFunc[value.string]
+      of "threads", "t":
+        useThreads = parseBool(value.string)
+      of "update", "u":
+        updateDuringRender = parseBool(value.string)
       of "p":
         var s = (value.string).split(',')
         assert(s.len == 4)
@@ -90,7 +98,7 @@ proc main(): int =
                                       Renderer_TargetTexture)
   fpsman.init()
 
-  frac = NewFractalRenderer(width, height, 1024, window)
+  frac = NewFractalRenderer(width, height, 1024, window, updateDuringRender)
   frac.setBounds(x0, y0, x1, y1)
 
   # This syntax is a bit peculiar.  Its basically
@@ -101,7 +109,10 @@ proc main(): int =
   block mainloop:
     while running:
       if wantRender:
-        frac.render()
+        if useThreads:
+          frac.parallelRender()
+        else:
+          frac.render()
         wantRender = false
 
       while pollEvent(event):

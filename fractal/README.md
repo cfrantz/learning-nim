@@ -2,7 +2,7 @@
 
 ## Usage
 
-1. Compile: `nim c main.nim`
+1. Compile: `nim c --threads:on main.nim`
 2. Run: `./main <options...>`
 3. Use mouse to click/drag draw area to zoom into.
 
