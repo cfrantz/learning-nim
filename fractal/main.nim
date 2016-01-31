@@ -82,7 +82,6 @@ proc main(): int =
 
   var
     window: WindowPtr
-    render: RendererPtr
     fpsman: FpsManager
     frac: FractalRenderer
     running = true
@@ -93,9 +92,6 @@ proc main(): int =
   discard sdl2.init(INIT_EVERYTHING)
   window = createWindow("Fractal Viewer", 100, 100,
                         width.cint, height.cint, SDL_WINDOW_SHOWN)
-  render = createRenderer(window, -1, Renderer_Accelerated or
-                                      Renderer_PresentVsync or
-                                      Renderer_TargetTexture)
   fpsman.init()
 
   frac = NewFractalRenderer(width, height, 1024, window, updateDuringRender)
