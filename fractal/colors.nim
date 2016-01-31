@@ -44,6 +44,24 @@ proc roygbiv(x, y, precolor: float): uint32 {.procvar.} =
   return 0xFF000000'u32 + c.uint32
 
 
+proc vibgyor(x, y, precolor: float): uint32 {.procvar.} =
+  let ff = 7.0 * precolor
+  var n = ff.int
+  var f = ff - n.float
+
+  if n == 7:
+    return 0
+  if n mod 2 != 1:
+    f = 1.0 - f
+
+  var
+    r = (rainbow[6-n].r * f).int
+    g = (rainbow[6-n].g * f).int
+    b = (rainbow[6-n].b * f).int
+    c = (r shl 16) or (g shl 8) or b
+  return 0xFF000000'u32 + c.uint32
+
+
 proc onthesea(x, y, precolor: float): uint32 {.procvar.} =
   var r, g, b: float
   var f = 1.5 * log10(precolor*1000) / log10(1000)
@@ -68,6 +86,7 @@ var
     "naive": naive,
     "gray": gray,
     "roygbiv": roygbiv,
+    "vibgyor": vibgyor,
     "onthesea": onthesea,
   }.toTable
 
