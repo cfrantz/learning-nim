@@ -54,7 +54,6 @@ proc render*(this: FractalRenderer): void =
     xi = (this.x1 - this.x0) / this.width.float
     yi = (this.y1 - this.y0) / this.height.float
   var
-    x, y: int16 = 0
     xx = this.x0
     yy = this.y0
     p = 0
