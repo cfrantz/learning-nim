@@ -1,7 +1,9 @@
 import sdl2
 
+
 proc getPixelPointer*(surface: SurfacePtr): ptr uint32 =
   return cast[ptr uint32](surface.pixels)
+
 
 proc getPixelPointer*(window: WindowPtr): ptr uint32 =
   return getPixelPointer(getSurface(window))
@@ -15,6 +17,7 @@ proc `[]`*(p: ptr uint32, offset: int): uint32 =
   let p2 = cast[ptr uint32](p1)
   return p2[]
 
+
 proc `[]=`*(p: ptr uint32, offset: int, value: uint32): void =
   let p1 = cast[int64](p) + offset * 4
   let p2 = cast[ptr uint32](p1)
@@ -26,6 +29,7 @@ proc maybeSwap*(x0, x1: var int): void =
     var t = x0
     x0 = x1
     x1 = t
+
 
 # Draw a square on the display by XORing agains the color that's already
 # displayed.

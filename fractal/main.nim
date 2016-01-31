@@ -1,13 +1,14 @@
 import parseopt2
-import strutils
-import tables
 import sdl2
 import sdl2/gfx
+import strutils
+import tables
 
+import colors
 import fractal
 import functions
-import colors
 import util
+
 
 proc usage(): int =
   echo """Usage:
@@ -28,6 +29,7 @@ proc usage(): int =
     echo "    ", k
   echo ""
   return 0
+
 
 proc main(): int =
   var
@@ -128,6 +130,7 @@ proc main(): int =
             drawSquareXor(window, mx0, my0, mx1, my1)
       fpsman.delay()
   return 0
+
 
 quit(main())
 

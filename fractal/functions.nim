@@ -1,7 +1,7 @@
 import complex
 import tables
 
-proc mandelbrot*(x, y: float, bailout: int): float {.procvar.} =
+proc mandelbrot(x, y: float, bailout: int): float {.procvar.} =
   var
     c: Complex = (re: x, im: y)
     z: Complex = (re: 0.0, im: 0.0)
@@ -17,7 +17,7 @@ proc mandelbrot*(x, y: float, bailout: int): float {.procvar.} =
     i += 1
   return i / bailout
 
-proc burningship*(x, y: float, bailout: int): float =
+proc burningship(x, y: float, bailout: int): float =
   var
     c: Complex = (re: x, im: y)
     z: Complex = (re: 0.0, im: 0.0)
