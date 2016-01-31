@@ -53,10 +53,10 @@ proc newton1(x, y: float, bailout: int): float =
 
 
 var
-  fractalFunc* = initTable[string, proc(x, y: float, bailout: int): float]()
-
-fractalFunc["mandelbrot"] = mandelbrot
-fractalFunc["burningship"] = burningship
-fractalFunc["newton1"] = newton1
+  fractalFunc* = {
+    "mandelbrot": mandelbrot,
+    "burningship": burningship,
+    "newton1": newton1,
+  }.toTable()
 
 # vim: ts=2 sts=2 sw=2 expandtab:

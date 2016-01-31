@@ -34,9 +34,6 @@
 * I'm surprised that in a proc I apparently can't modify the parameters (e.g.
   I might want to swap `x0` and `x1` in `util.drawSquareXor`).
 
-* Is there a better way to initialize `Table`s?  (e.g. `colorFunc` in `colors`
-  and `fractalFunc` in `functions`).
-
 * Is there a better way to initialize a specialized array? (e.g. `rainbow` in
   `colors`).
 

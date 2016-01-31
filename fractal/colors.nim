@@ -64,10 +64,11 @@ proc onthesea(x, y, precolor: float): uint32 {.procvar.} =
   return 0xFF000000'u32 + c.uint32
 
 var
-  colorFunc* = initTable[string, proc(x, y, precolor: float): uint32]()
+  colorFunc* = {
+    "naive": naive,
+    "gray": gray,
+    "roygbiv": roygbiv,
+    "onthesea": onthesea,
+  }.toTable
 
-colorFunc["naive"] = naive
-colorFunc["gray"] = gray
-colorFunc["onthesea"] = onthesea
-colorFunc["roygbiv"] = roygbiv
 # vim: ts=2 sts=2 sw=2 expandtab:
