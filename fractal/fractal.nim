@@ -57,6 +57,7 @@ proc render*(this: FractalRenderer): void =
     pptr = getPixelPointer(surface)
     stride = surface.pitch div 4
 
+  echo "Coordinates: ", this.x0, ",", this.y0, ",", this.x1, ",", this.y1
   while y < this.height:
     xx = this.x0
     x = 0
